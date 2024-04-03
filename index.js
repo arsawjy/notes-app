@@ -1,4 +1,4 @@
-const addBox = document.querySelector(".add-box");
+const addBox = document.querySelector("add-box");
 const popUpBox = document.querySelector(".popup-box");
 const closeIcon = document.querySelector("header i");
 const titleTag = document.querySelector("input");
@@ -28,20 +28,23 @@ addBtn.addEventListener("click", (e) => {
     let noteDesc = descTag.value;
     if (noteTitle || noteDesc){
         let dateObj = new Date();
+        let hours = dateObj.getHours();
+        let minutes = dateObj.getMinutes(); 
         let month = months[dateObj.getMonth()];
         let day = dateObj.getDate();
         let year = dateObj.getFullYear();
 
-        let noteInfo = {
+        let notesData = {
+            id: `note-${Date.now()}`, // Generating unique id
             title: noteTitle,
             description: noteDesc,
-            date: `${month} ${day} ${year}`
+            date: `${hours}:${minutes} ${month} ${day} ${year}` 
         };  
         if(!isUpdate){
-            notes.push(noteInfo);
+            notes.push(notesData);
         } else {
             isUpdate = false;
-            notes[UpdateId] = noteInfo;
+            notes[UpdateId] = notesData;
         } 
         localStorage.setItem("notes", JSON.stringify(notes));
         closeIcon.click();
@@ -75,14 +78,14 @@ function showNotes(filteredNotes = notes) {
     });
 }
 
-showNotes(); 
+showNotes();
+
 
 closeIcon.addEventListener("click", ()=>{
     titleTag.value = "";
     descTag.value = "";
 });
 
-// Define showMenu as a global function
 window.showMenu = function(elem) {
     elem.parentElement.classList.add("show");
     document.addEventListener("click", e =>{
@@ -92,7 +95,6 @@ window.showMenu = function(elem) {
     });
 }
 
-// Define updateNote as a global function
 window.updateNote = function(noteId, title, desc) {
     isUpdate = true;
     UpdateId = noteId;
@@ -103,7 +105,6 @@ window.updateNote = function(noteId, title, desc) {
     popupTitle.innerText = "Update a Note";
 }
 
-// Define deleteNote as a global function
 window.deleteNote = function(noteId) {
     let confirmDel = confirm("Are you sure you want to delete this item?");
     if (!confirmDel) return;

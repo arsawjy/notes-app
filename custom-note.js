@@ -20,12 +20,14 @@ class Note extends HTMLElement {
 
     connectedCallback() {
         this.innerHTML = `
+            
             <li class="note">
                 <div class="details"></div>
             </li>
         `;
     }
 }
+
 
 // Define the custom elements
 customElements.define('add-box', AddBox);
