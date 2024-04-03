@@ -5,6 +5,8 @@ const titleTag = document.querySelector("input");
 const descTag = document.querySelector("textarea");
 const addBtn = popUpBox.querySelector("button");
 const popupTitle = document.querySelector("header p");
+const wrapper = document.querySelector(".wrapper");
+const note =document.querySelector(".note");
 
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
@@ -80,7 +82,8 @@ closeIcon.addEventListener("click", ()=>{
     descTag.value = "";
 });
 
-function showMenu(elem){
+// Define showMenu as a global function
+window.showMenu = function(elem) {
     elem.parentElement.classList.add("show");
     document.addEventListener("click", e =>{
         if(e.target.tagName != "I" || e.target != elem){
@@ -89,16 +92,8 @@ function showMenu(elem){
     });
 }
 
-function deleteNote(noteId) {
-    let confirmDel = confirm("Are you sure you want to delete this item?");
-    if (!confirmDel) return;
-
-    notes.splice(noteId, 1);
-    localStorage.setItem("notes", JSON.stringify(notes));
-    showNotes();
-}
-
-function updateNote(noteId, title, desc) {
+// Define updateNote as a global function
+window.updateNote = function(noteId, title, desc) {
     isUpdate = true;
     UpdateId = noteId;
     addBox.click();
@@ -106,4 +101,14 @@ function updateNote(noteId, title, desc) {
     descTag.value = desc;
     addBtn.innerText = "Update Note";
     popupTitle.innerText = "Update a Note";
+}
+
+// Define deleteNote as a global function
+window.deleteNote = function(noteId) {
+    let confirmDel = confirm("Are you sure you want to delete this item?");
+    if (!confirmDel) return;
+
+    notes.splice(noteId, 1);
+    localStorage.setItem("notes", JSON.stringify(notes));
+    showNotes();
 }
