@@ -52,7 +52,7 @@ addBtn.addEventListener("click", (e) => {
     }
 });
 
-const notes = JSON.parse(localStorage.getItem("notes") || "[]");
+const notes = JSON.parse(localStorage.getItem("notes") || localStorage.setItem("notes", JSON.stringify(dummyNotes)));
 
 function showNotes(filteredNotes = notes) {
     document.querySelectorAll(".note").forEach(note => note.remove());
