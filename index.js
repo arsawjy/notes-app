@@ -35,7 +35,7 @@ addBtn.addEventListener("click", (e) => {
         let year = dateObj.getFullYear();
 
         let notesData = {
-            id: `note-${Date.now()}`, // Generating unique id
+            id: `note-${Date.now()}`,
             title: noteTitle,
             description: noteDesc,
             date: `${hours}:${minutes} ${month} ${day} ${year}` 
