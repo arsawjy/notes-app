@@ -1,3 +1,5 @@
+import "./notesData.js";
+
 const addBox = document.querySelector("add-box");
 const popUpBox = document.querySelector(".popup-box");
 const closeIcon = document.querySelector("header i");
@@ -7,6 +9,8 @@ const addBtn = popUpBox.querySelector("button");
 const popupTitle = document.querySelector("header p");
 const wrapper = document.querySelector(".wrapper");
 const note =document.querySelector(".note");
+const dummyNotes = require('./notesData.js');
+
 
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
@@ -52,7 +56,7 @@ addBtn.addEventListener("click", (e) => {
     }
 });
 
-const notes = JSON.parse(localStorage.getItem("notes") || localStorage.setItem("notes", JSON.stringify(dummyNotes)));
+const notes = JSON.parse(localStorage.getItem("notes")) || dummyNotes;
 
 function showNotes(filteredNotes = notes) {
     document.querySelectorAll(".note").forEach(note => note.remove());

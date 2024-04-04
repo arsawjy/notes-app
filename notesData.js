@@ -105,5 +105,7 @@ const dummyNotes = [
       archived: false,
     },
   ];
+
+  module.exports = dummyNotes;
   
 //   console.log(notesData);
