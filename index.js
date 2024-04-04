@@ -7,8 +7,6 @@ const addBtn = popUpBox.querySelector("button");
 const popupTitle = document.querySelector("header p");
 const wrapper = document.querySelector(".wrapper");
 const note =document.querySelector(".note");
-const dummyNotes = require('./notesData.js');
-
 
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
@@ -37,7 +35,7 @@ addBtn.addEventListener("click", (e) => {
         let year = dateObj.getFullYear();
 
         let notesData = {
-            id: `note-${Date.now()}`,
+            id: `notes-${Date.now()}`,
             title: noteTitle,
             description: noteDesc,
             date: `${hours}:${minutes} ${month} ${day} ${year}` 
@@ -54,7 +52,12 @@ addBtn.addEventListener("click", (e) => {
     }
 });
 
-const notes = JSON.parse(localStorage.getItem("notes")) || dummyNotes;
+if (localStorage.getItem("notes") === null) {
+    localStorage.setItem("notes", JSON.stringify(dummyNotes))
+  }
+  
+const notes = JSON.parse(localStorage.getItem("notes"));
+
 
 function showNotes(filteredNotes = notes) {
     document.querySelectorAll(".note").forEach(note => note.remove());
