@@ -1,4 +1,4 @@
-const dummyNotes = [
+export const dummyNotes = [
     {
       id: 'notes-jT-jjsyz61J8XKiI',
       title: 'Welcome to Notes, Dimas!',
@@ -105,4 +105,3 @@ const dummyNotes = [
       archived: false,
     },
   ];
-  

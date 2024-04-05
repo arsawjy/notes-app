@@ -6,7 +6,10 @@ const descTag = document.querySelector("textarea");
 const addBtn = popUpBox.querySelector("button");
 const popupTitle = document.querySelector("header p");
 const wrapper = document.querySelector(".wrapper");
-const note =document.querySelector(".note");
+
+import { dummyNotes } from './notesData.js';
+
+const note = document.querySelector(".note");
 
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
@@ -18,7 +21,7 @@ addBox.addEventListener("click", function(){
     popUpBox.classList.add("show");
 });
 
-closeIcon.addEventListener("click", ()=>{
+closeIcon.addEventListener("click", () => {
     popUpBox.classList.remove("show");
 });
 
@@ -29,7 +32,7 @@ addBtn.addEventListener("click", (e) => {
     if (noteTitle || noteDesc){
         let dateObj = new Date();
         let hours = dateObj.getHours();
-        let minutes = dateObj.getMinutes(); 
+        let minutes = dateObj.getMinutes();
         let month = months[dateObj.getMonth()];
         let day = dateObj.getDate();
         let year = dateObj.getFullYear();
@@ -37,26 +40,22 @@ addBtn.addEventListener("click", (e) => {
         let notesData = {
             id: `notes-${Date.now()}`,
             title: noteTitle,
-            description: noteDesc,
-            date: `${hours}:${minutes} ${month} ${day} ${year}` 
+            body: noteDesc,
+            createdAt: `${hours}:${minutes} ${month} ${day} ${year}`
         };  
         if(!isUpdate){
             notes.push(notesData);
         } else {
             isUpdate = false;
             notes[UpdateId] = notesData;
-        } 
+        }
         localStorage.setItem("notes", JSON.stringify(notes));
         closeIcon.click();
         showNotes();
     }
 });
 
-if (localStorage.getItem("notes") === null) {
-    localStorage.setItem("notes", JSON.stringify(dummyNotes))
-  }
-  
-const notes = JSON.parse(localStorage.getItem("notes"));
+const notes = dummyNotes;
 
 
 function showNotes(filteredNotes = notes) {
@@ -66,14 +65,14 @@ function showNotes(filteredNotes = notes) {
         <li class="note">
             <div class="details">
                 <p>${note.title}</p>
-                <span>${note.description}</span>
+                <span>${note.body}</span>
             </div>
             <div class="bottom-content">
-                <span>${note.date}</span>
+                <span>${note.createdAt}</span>
                 <div class="settings">
                     <i onclick="showMenu(this)" class="uil uil-ellipsis-h"></i>
                     <ul class="menu">
-                        <li onclick="updateNote(${index}, '${note.title}', '${note.description}')"><i class="uil uil-pen"></i>Edit</li>
+                        <li onclick="updateNote(${index}, '${note.title}', '${note.body}')"><i class="uil uil-pen"></i>Edit</li>
                         <li onclick="deleteNote(${index})"><i class="uil uil-trash"></i>Delete</li>
                     </ul>
                 </div>
@@ -86,14 +85,14 @@ function showNotes(filteredNotes = notes) {
 showNotes();
 
 
-closeIcon.addEventListener("click", ()=>{
+closeIcon.addEventListener("click", () => {
     titleTag.value = "";
     descTag.value = "";
 });
 
 window.showMenu = function(elem) {
     elem.parentElement.classList.add("show");
-    document.addEventListener("click", e =>{
+    document.addEventListener("click", e => {
         if(e.target.tagName != "I" || e.target != elem){
             elem.parentElement.classList.remove("show");
         }

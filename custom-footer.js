@@ -14,8 +14,11 @@ class CustomFooter extends HTMLElement {
                     display: block; /* Make it a block-level element */
                     background-color: #333;
                     color: #fff;
-                    padding: 10px;
+                    height: 25px;
+                    padding: 15px;
+                    margin:10px;
                     text-align: center;
+                    align-items: center;
                     position: fixed;
                     bottom: 0;
                     left: 0;
@@ -29,7 +32,7 @@ class CustomFooter extends HTMLElement {
             </style>
 
             <!-- Custom footer content -->
-            <p>&copy; 2024 My Website. All rights reserved.</p>
+            <p>&copy; 2024 Arsa's Notes App. All rights reserved. Made with Javascript, HTML, and CSS</p>
         `;
     }
 }
